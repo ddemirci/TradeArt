@@ -21,5 +21,16 @@ namespace TradeArtWebAPI.Controllers
             var invertedText = _taskService.InvertText(text);
             return Ok(invertedText);
         }
+
+        [HttpGet]
+        [Route("task2")]
+        public async Task<IActionResult> Task2_WithoutBlocking()
+        {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            await _taskService.FunctionA();
+            sw.Stop();
+            return Ok($"{sw.ElapsedMilliseconds} ms elapsed.");
+        }
     }
 }
