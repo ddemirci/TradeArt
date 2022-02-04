@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArtWebAPI", "TradeArtWebAPI\TradeArtWebAPI.csproj", "{17012D0E-384C-4AC6-AA62-9FD7AA9F75D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArtWebAPI", "TradeArtWebAPI\TradeArtWebAPI.csproj", "{17012D0E-384C-4AC6-AA62-9FD7AA9F75D9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D956E061-F4EF-436C-89A6-49BD5EA57A04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.TaskService", "TradeArt.TaskService\TradeArt.TaskService.csproj", "{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.Interfaces", "TradeArt.Interfaces\TradeArt.Interfaces.csproj", "{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +21,20 @@ Global
 		{17012D0E-384C-4AC6-AA62-9FD7AA9F75D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17012D0E-384C-4AC6-AA62-9FD7AA9F75D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17012D0E-384C-4AC6-AA62-9FD7AA9F75D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D} = {D956E061-F4EF-436C-89A6-49BD5EA57A04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CDDF621-A737-4662-A8E4-EB6E17D2D0E8}
