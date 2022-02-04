@@ -1,8 +1,13 @@
+using TradeArtWebAPI.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//Add custom services to the container.
+builder.Services.AddCustomServices();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
