@@ -18,4 +18,8 @@
     <ProjectReference Include="..\TradeArt.TaskService\TradeArt.TaskService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
 </Project>

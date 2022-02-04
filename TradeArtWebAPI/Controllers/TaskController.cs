@@ -32,5 +32,14 @@ namespace TradeArtWebAPI.Controllers
             sw.Stop();
             return Ok($"{sw.ElapsedMilliseconds} ms elapsed.");
         }
+
+        [HttpPost]
+        [Route("task3")]
+        public IActionResult Task3_CalculateSHA256Hash([FromBody] string filePath)
+        {
+            //TODOO: Handle if the file does not exist.
+            var res = _taskService.CalculateSHA256Hash(filePath);
+            return Ok(res);
+        }
     }
 }
