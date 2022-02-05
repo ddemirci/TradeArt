@@ -37,6 +37,16 @@ namespace TradeArtWebAPI.Controllers
             return Ok($"{sw.ElapsedMilliseconds} ms elapsed.");
         }
 
+        [HttpPost]
+        [Route("task3")]
+        public IActionResult Task3_CalculateSHA256Hash([FromBody] string filePath)
+        {
+            if (!System.IO.File.Exists(filePath))
+                return NotFound($"Specified file does not exists in path {filePath}");
+            var res = _taskService.CalculateSHA256Hash(filePath);
+            return Ok(res);
+        }
+
         [HttpGet]
         [Route("task4")]
         public async Task<IActionResult> Task4_GetAssetPrices(string quoteCurrency)
