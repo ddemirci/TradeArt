@@ -24,7 +24,7 @@ namespace TradeArt.Tests
         }
 
         [Test]
-        public void Task1_Succeeded()
+        public void InvertText_Succeeded()
         {
             //Arrange
             var text = "abcd";
@@ -37,7 +37,7 @@ namespace TradeArt.Tests
         }
 
         [Test]
-        public async Task Task2_Succeeded()
+        public async Task FunctionA_Succeeded()
         {
             //Arrange
             var sw = System.Diagnostics.Stopwatch.StartNew();
@@ -52,7 +52,7 @@ namespace TradeArt.Tests
         }
 
         [Test]
-        public void Task3_Succeeded()
+        public void CalculateSHA256Hash_Succeeded()
         {
             //Arrange
             var fileName= "Test.txt";
