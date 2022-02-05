@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TradeArt.BlocktapIOService\TradeArt.BlocktapIOService.csproj" />
     <ProjectReference Include="..\TradeArt.Interfaces\TradeArt.Interfaces.csproj" />
     <ProjectReference Include="..\TradeArt.TaskService\TradeArt.TaskService.csproj" />
   </ItemGroup>

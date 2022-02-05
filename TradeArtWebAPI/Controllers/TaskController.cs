@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TradeArt.BlocktapIOService.Data.Models;
+using TradeArt.BlocktapIOService.Data.Models.Request;
 using TradeArt.Interfaces;
 
 namespace TradeArtWebAPI.Controllers
@@ -8,10 +10,12 @@ namespace TradeArtWebAPI.Controllers
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
+        private readonly IBlocktapIOService _blocktapIOService;
 
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IBlocktapIOService blocktapIOService)
         {
             _taskService = taskService;
+            _blocktapIOService = blocktapIOService;
         }
 
         [HttpPost]
@@ -31,6 +35,38 @@ namespace TradeArtWebAPI.Controllers
             await _taskService.FunctionA();
             sw.Stop();
             return Ok($"{sw.ElapsedMilliseconds} ms elapsed.");
+        }
+
+        [HttpGet]
+        [Route("task4")]
+        public async Task<IActionResult> Task4_GetAssetPrices(string quoteCurrency)
+        {
+            var topAssets = await _blocktapIOService.GetAllAssets(100);
+            var assetChunks = topAssets.Select(x=> x.AssetSymbol).Chunk(20);
+
+            var list = new List<Market>(100); 
+            foreach(var assetChunk in assetChunks)
+            {
+                var res = await Task4_RetrieveMarketInformation(assetChunk, quoteCurrency);
+                list.AddRange(res);
+            }
+
+            return Ok(list);
+        }
+
+        private async Task<Market[]> Task4_RetrieveMarketInformation(IEnumerable<string> assets, string quoteSymbol)
+        {
+            var taskList = new List<Task<Market>>();
+            foreach (var asset in assets)
+            {
+                taskList.Add(Task.Run(() =>_blocktapIOService.GetMarketForBaseAndQuoteCurrency(new FindExchangeRequest
+                {
+                    BaseSymbol = asset,
+                    QuoteSymbol = quoteSymbol
+                })));
+            }
+
+            return await Task.WhenAll(taskList);
         }
     }
 }
