@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArtWebAPI", "TradeArtW
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D956E061-F4EF-436C-89A6-49BD5EA57A04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.TaskService", "TradeArt.TaskService\TradeArt.TaskService.csproj", "{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArt.TaskService", "TradeArt.TaskService\TradeArt.TaskService.csproj", "{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.Interfaces", "TradeArt.Interfaces\TradeArt.Interfaces.csproj", "{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArt.Interfaces", "TradeArt.Interfaces\TradeArt.Interfaces.csproj", "{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlocktapIOService", "BlocktapIOService", "{8D44F30A-F0B4-4B06-817F-0D23FFF4098A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.BlocktapIOService", "TradeArt.BlocktapIOService\TradeArt.BlocktapIOService.csproj", "{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.BlocktapIOService.Data", "TradeArt.BlocktapIOService.Data\TradeArt.BlocktapIOService.Data.csproj", "{BE158455-9160-4850-A000-4AF58C5F3EA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +35,23 @@ Global
 		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D3F16CD-991D-4EFB-A4B5-6F85FBD621D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C0AD0416-BE28-4980-8ABB-ADB95D4AC44D} = {D956E061-F4EF-436C-89A6-49BD5EA57A04}
+		{8D44F30A-F0B4-4B06-817F-0D23FFF4098A} = {D956E061-F4EF-436C-89A6-49BD5EA57A04}
+		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB} = {8D44F30A-F0B4-4B06-817F-0D23FFF4098A}
+		{BE158455-9160-4850-A000-4AF58C5F3EA1} = {8D44F30A-F0B4-4B06-817F-0D23FFF4098A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CDDF621-A737-4662-A8E4-EB6E17D2D0E8}

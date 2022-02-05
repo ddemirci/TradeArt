@@ -1,4 +1,5 @@
-﻿using TradeArt.Interfaces;
+﻿using TradeArt.BlocktapIOService.Impl;
+using TradeArt.Interfaces;
 using TradeArt.TaskService.Impl;
 
 namespace TradeArtWebAPI.Extensions
@@ -8,6 +9,7 @@ namespace TradeArtWebAPI.Extensions
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IBlocktapIOService, BlocktapIOService>();
         }
     }
 }
