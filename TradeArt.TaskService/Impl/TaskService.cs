@@ -33,7 +33,6 @@ namespace TradeArt.TaskService.Impl
 
         public string CalculateSHA256Hash(string filePath)
         {
-            //TODO: Handle filepath does not exist
             using var filestream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             using var sha256 = SHA256.Create();
             var hash = sha256.ComputeHash(filestream);
