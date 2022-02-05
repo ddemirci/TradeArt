@@ -3,6 +3,6 @@
     public interface ITaskService
     {
         string InvertText(string text);
-        Task<bool> FunctionA();
+        Task FunctionA();
     }
 }

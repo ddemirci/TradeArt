@@ -13,13 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArt.Interfaces", "Trad
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlocktapIOService", "BlocktapIOService", "{8D44F30A-F0B4-4B06-817F-0D23FFF4098A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArt.BlocktapIOService", "TradeArt.BlocktapIOService\TradeArt.BlocktapIOService.csproj", "{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.BlocktapIOService", "TradeArt.BlocktapIOService\TradeArt.BlocktapIOService.csproj", "{1E9123D9-EF31-4D63-8AC3-C67E22707FFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradeArt.BlocktapIOService.Data", "TradeArt.BlocktapIOService.Data\TradeArt.BlocktapIOService.Data.csproj", "{BE158455-9160-4850-A000-4AF58C5F3EA1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{90095392-00CD-4BB7-8C81-1D6E54269377}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.Tests", "TradeArt.Tests\TradeArt.Tests.csproj", "{CC0B27EE-4329-4C28-95B7-BEB80CEB3044}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradeArt.BlocktapIOService.Data", "TradeArt.BlocktapIOService.Data\TradeArt.BlocktapIOService.Data.csproj", "{BE158455-9160-4850-A000-4AF58C5F3EA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +43,6 @@ Global
 		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE158455-9160-4850-A000-4AF58C5F3EA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC0B27EE-4329-4C28-95B7-BEB80CEB3044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC0B27EE-4329-4C28-95B7-BEB80CEB3044}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC0B27EE-4329-4C28-95B7-BEB80CEB3044}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC0B27EE-4329-4C28-95B7-BEB80CEB3044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,7 +52,6 @@ Global
 		{8D44F30A-F0B4-4B06-817F-0D23FFF4098A} = {D956E061-F4EF-436C-89A6-49BD5EA57A04}
 		{1E9123D9-EF31-4D63-8AC3-C67E22707FFB} = {8D44F30A-F0B4-4B06-817F-0D23FFF4098A}
 		{BE158455-9160-4850-A000-4AF58C5F3EA1} = {8D44F30A-F0B4-4B06-817F-0D23FFF4098A}
-		{CC0B27EE-4329-4C28-95B7-BEB80CEB3044} = {90095392-00CD-4BB7-8C81-1D6E54269377}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CDDF621-A737-4662-A8E4-EB6E17D2D0E8}

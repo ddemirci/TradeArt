@@ -30,8 +30,11 @@ namespace TradeArtWebAPI.Controllers
         [Route("task2")]
         public async Task<IActionResult> Task2_WithoutBlocking()
         {
-            var isAllCompleted = await _taskService.FunctionA();
-            return Ok(isAllCompleted);
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            await _taskService.FunctionA();
+            sw.Stop();
+            return Ok($"{sw.ElapsedMilliseconds} ms elapsed.");
         }
 
         [HttpGet]
