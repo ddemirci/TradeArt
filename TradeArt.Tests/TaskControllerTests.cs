@@ -6,6 +6,10 @@ using System.IO;
 using System.Threading.Tasks;
 using TradeArt.Interfaces;
 using TradeArtWebAPI.Controllers;
+using System.Collections.Generic;
+using TradeArt.BlocktapIOService.Data.Models;
+using TradeArt.BlocktapIOService.Data.Models.Request;
+using System.Linq;
 
 namespace TradeArt.Tests
 {
@@ -102,6 +106,46 @@ namespace TradeArt.Tests
 
             var message = notFoundObjectResult.Value as string ?? string.Empty;
             Assert.AreEqual(message, $"Specified file does not exists in path {filePath}");
+        }
+
+        [Test]
+        public void Task4_Succeeded()
+        {
+            //Arrange
+            var quoteSymbol = "USDT";
+            mockBlocktapIOService.Setup(x => x.GetAllAssets(100)).Returns(Task.FromResult(new List<Asset>
+            {
+                new Asset
+                {
+                    AssetName = "Ethereum",
+                    AssetSymbol = "ETH",
+                    MarketCap = 360030739596,
+                    MarketCapRank = 2
+                }
+            }));
+
+            mockBlocktapIOService.Setup(x => x.GetMarketForBaseAndQuoteCurrency(It.IsAny<FindExchangeRequest>())).Returns(Task.FromResult(new Market
+            {
+                ExchangeSymbol = "Binance",
+                MarketSymbol = "Binance:ETH/USDT",
+                BaseSymbol = "ETH",
+                QuoteSymbol = "USDT",
+                Ticker = new Ticker
+                {
+                    LastPrice = 3971.02000000M,
+                }
+            }));
+
+            //Act
+            IActionResult actionResult = taskController.Task4_GetAssetPrices(quoteSymbol).Result;
+
+            //Assert
+            var okObjectResult = actionResult as OkObjectResult;
+            Assert.IsNotNull(okObjectResult);
+
+            var marketList = okObjectResult.Value as List<Market> ?? new List<Market>();
+            Assert.AreEqual(1, marketList.Count);
+            Assert.True(marketList.Any(x => x.BaseSymbol == "ETH" && x.QuoteSymbol == quoteSymbol));
         }
     }
 }
