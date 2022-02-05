@@ -10,7 +10,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+
 COPY ["TradeArtWebAPI/TradeArtWebAPI.csproj", "TradeArtWebAPI/"]
+COPY ["TradeArt.Interfaces/TradeArt.Interfaces.csproj", "TradeArt.Interfaces/"]
+COPY ["TradeArt.BlocktapIOService.Data/TradeArt.BlocktapIOService.Data.csproj", "TradeArt.BlocktapIOService.Data/"]
+COPY ["TradeArt.TaskService/TradeArt.TaskService.csproj", "TradeArt.TaskService/"]
+COPY ["TradeArt.BlocktapIOService/TradeArt.BlocktapIOService.csproj", "TradeArt.BlocktapIOService/"]
 RUN dotnet restore "TradeArtWebAPI/TradeArtWebAPI.csproj"
 COPY . .
 WORKDIR "/src/TradeArtWebAPI"
