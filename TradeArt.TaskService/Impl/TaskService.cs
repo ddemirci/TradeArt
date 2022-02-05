@@ -13,7 +13,7 @@ namespace TradeArt.TaskService.Impl
             return string.Join("", arr);
         }
 
-        public async Task FunctionA()
+        public async Task<bool> FunctionA()
         {
             var list = new List<Task<bool>>();
             for (int i = 1; i < 1001; i++)
@@ -21,6 +21,7 @@ namespace TradeArt.TaskService.Impl
                 list.Add(Task.Run(() => FunctionB(i)));
             }
             await Task.WhenAll(list);
+            return list.All(x => x.Status == TaskStatus.RanToCompletion);
         }
 
         private async Task<bool> FunctionB(int data)
