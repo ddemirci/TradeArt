@@ -41,7 +41,8 @@ namespace TradeArtWebAPI.Controllers
         [Route("task3")]
         public IActionResult Task3_CalculateSHA256Hash([FromBody] string filePath)
         {
-            //TODOO: Handle if the file does not exist.
+            if (!System.IO.File.Exists(filePath))
+                return NotFound($"Specified file does not exists in path {filePath}");
             var res = _taskService.CalculateSHA256Hash(filePath);
             return Ok(res);
         }
