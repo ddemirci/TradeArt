@@ -1,4 +1,5 @@
-﻿using TradeArt.Core;
+﻿using System.Threading.Tasks;
+using TradeArt.Core;
 
 namespace TradeArt.Interfaces
 {
