@@ -29,9 +29,10 @@ namespace TradeArt.Tests
             var result = blocktapIOService.GetAllAssets(count).Result;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsNotEmpty(result);
-            Assert.AreEqual(count, result.Count);
+            Assert.IsTrue(result.IsSuccess);
+            Assert.IsNotNull(result.Data);
+            Assert.IsNotEmpty(result.Data);
+            Assert.AreEqual(count, result.Data.Count);
         }
 
         [Test]
@@ -48,9 +49,10 @@ namespace TradeArt.Tests
             var result = blocktapIOService.GetMarketForBaseAndQuoteCurrency(request).Result;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(request.BaseSymbol, result.BaseSymbol);
-            Assert.AreEqual(request.QuoteSymbol, result.QuoteSymbol);
+            Assert.IsTrue(result.IsSuccess);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(request.BaseSymbol, result.Data.BaseSymbol);
+            Assert.AreEqual(request.QuoteSymbol, result.Data.QuoteSymbol);
         }
     }
 }

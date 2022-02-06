@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
 using System.Linq;
+using TradeArt.Core;
+using TradeArt.Core.Models;
 
 namespace TradeArt.Tests
 {
@@ -73,7 +75,7 @@ namespace TradeArt.Tests
             File.WriteAllText(filePath, "This is a new text file");
 
             var sha256OfFile = "0445e45d70d62074cc6a608ddf95f89e275f495d3f6a2d9d0f1ddae36bb4ab50";
-            mockTaskService.Setup(x => x.CalculateSHA256Hash(filePath)).Returns(sha256OfFile);
+            mockTaskService.Setup(x => x.CalculateSHA256Hash(filePath)).Returns(Result<string>.AsSuccess(sha256OfFile));
             IActionResult actionResult = taskController.Task3_CalculateSHA256Hash(filePath);
 
             //Clean
@@ -83,8 +85,9 @@ namespace TradeArt.Tests
             var okObjectResult = actionResult as OkObjectResult;
             Assert.IsNotNull(okObjectResult);
 
-            var sha256 = okObjectResult.Value as string ?? string.Empty;
-            Assert.AreEqual(sha256, sha256OfFile);
+            var sha256Result = okObjectResult.Value as string ?? string.Empty;
+            Assert.IsNotEmpty(sha256Result);
+            Assert.AreEqual(sha256OfFile, sha256Result);
         }
 
 
@@ -113,28 +116,32 @@ namespace TradeArt.Tests
         {
             //Arrange
             var quoteSymbol = "USDT";
-            mockBlocktapIOService.Setup(x => x.GetAllAssets(100)).Returns(Task.FromResult(new List<Asset>
-            {
-                new Asset
+            mockBlocktapIOService.Setup(x => x.GetAllAssets(100)).Returns(
+                Task.FromResult(Result<List<Asset>>.AsSuccess(new List<Asset>
                 {
-                    AssetName = "Ethereum",
-                    AssetSymbol = "ETH",
-                    MarketCap = 360030739596,
-                    MarketCapRank = 2
-                }
-            }));
+                    new Asset
+                    {
+                        AssetName = "Ethereum",
+                        AssetSymbol = "ETH",
+                        MarketCap = 360030739596,
+                        MarketCapRank = 2
+                    }
+                })
+            ));
 
-            mockBlocktapIOService.Setup(x => x.GetMarketForBaseAndQuoteCurrency(It.IsAny<FindExchangeRequest>())).Returns(Task.FromResult(new Market
-            {
-                ExchangeSymbol = "Binance",
-                MarketSymbol = "Binance:ETH/USDT",
-                BaseSymbol = "ETH",
-                QuoteSymbol = "USDT",
-                Ticker = new Ticker
+            mockBlocktapIOService.Setup(x => x.GetMarketForBaseAndQuoteCurrency(It.IsAny<FindExchangeRequest>())).Returns(
+                Task.FromResult(Result<Market>.AsSuccess(new Market
                 {
-                    LastPrice = 3971.02000000M,
-                }
-            }));
+                    ExchangeSymbol = "Binance",
+                    MarketSymbol = "Binance:ETH/USDT",
+                    BaseSymbol = "ETH",
+                    QuoteSymbol = "USDT",
+                    Ticker = new Ticker
+                    {
+                        LastPrice = 3971.02000000M,
+                    }
+                })
+            ));
 
             //Act
             IActionResult actionResult = taskController.Task4_GetAssetPrices(quoteSymbol).Result;
@@ -143,9 +150,10 @@ namespace TradeArt.Tests
             var okObjectResult = actionResult as OkObjectResult;
             Assert.IsNotNull(okObjectResult);
 
-            var marketList = okObjectResult.Value as List<Market> ?? new List<Market>();
-            Assert.AreEqual(1, marketList.Count);
-            Assert.True(marketList.Any(x => x.BaseSymbol == "ETH" && x.QuoteSymbol == quoteSymbol));
+            var assetPriceInformation = okObjectResult.Value as AssetsPriceInformation ?? new AssetsPriceInformation();
+            Assert.AreEqual(1, assetPriceInformation.SuccessCount);
+            Assert.AreEqual(0, assetPriceInformation.FailureCount);
+            Assert.True(assetPriceInformation.SuccessList.Any(x => x.BaseSymbol == "ETH" && x.QuoteSymbol == quoteSymbol));
         }
     }
 }

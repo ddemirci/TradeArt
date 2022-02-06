@@ -60,13 +60,14 @@ namespace TradeArt.Tests
             File.WriteAllText(filePath, "This is a new text file");
 
             //Act
-            var result = taskService.CalculateSHA256Hash(filePath);
+            var hashResult = taskService.CalculateSHA256Hash(filePath);
 
             //Clean
             File.Delete(filePath);
 
             //Assert
-            Assert.AreEqual("0445e45d70d62074cc6a608ddf95f89e275f495d3f6a2d9d0f1ddae36bb4ab50", result);
+            Assert.IsTrue(hashResult.IsSuccess);
+            Assert.AreEqual("0445e45d70d62074cc6a608ddf95f89e275f495d3f6a2d9d0f1ddae36bb4ab50", hashResult.Data);
         }
     }
 }
