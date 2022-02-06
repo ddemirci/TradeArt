@@ -1,4 +1,5 @@
-﻿using TradeArt.BlocktapIOService.Data.Models;
+﻿using System.Collections.Generic;
+using TradeArt.BlocktapIOService.Data.Models;
 
 namespace TradeArt.Core.Models
 {

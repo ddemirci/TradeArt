@@ -1,4 +1,5 @@
-﻿using TradeArt.BlocktapIOService.Impl;
+﻿using Microsoft.Extensions.DependencyInjection;
+using TradeArt.BlocktapIOService.Impl;
 using TradeArt.Interfaces;
 using TradeArt.TaskService.Impl;
 

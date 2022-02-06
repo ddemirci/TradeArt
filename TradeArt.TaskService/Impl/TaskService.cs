@@ -1,6 +1,11 @@
 ﻿using TradeArt.Interfaces;
 using System.Security.Cryptography;
 using TradeArt.Core;
+using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace TradeArt.TaskService.Impl
 {

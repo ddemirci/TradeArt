@@ -1,6 +1,10 @@
 ﻿using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
 using TradeArt.BlocktapIOService.Data.Models.Response;

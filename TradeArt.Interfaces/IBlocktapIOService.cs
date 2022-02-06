@@ -1,4 +1,6 @@
-﻿using TradeArt.BlocktapIOService.Data.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
 using TradeArt.Core;
 
