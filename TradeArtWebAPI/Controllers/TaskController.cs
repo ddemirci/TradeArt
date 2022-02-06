@@ -18,6 +18,11 @@ namespace TradeArtWebAPI.Controllers
             _blocktapIOService = blocktapIOService;
         }
 
+        /// <summary>
+        /// Inverts given text.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>Inverted text</returns>
         [HttpPost]
         [Route("task1")]
         public IActionResult Task1_InvertText([FromBody] string text)
@@ -26,6 +31,10 @@ namespace TradeArtWebAPI.Controllers
             return Ok(invertedText);
         }
 
+        /// <summary>
+        /// Works as fast as possible
+        /// </summary>
+        /// <returns>isAllCompleted</returns>
         [HttpGet]
         [Route("task2")]
         public async Task<IActionResult> Task2_WithoutBlocking()
@@ -34,6 +43,12 @@ namespace TradeArtWebAPI.Controllers
             return Ok(isAllCompleted);
         }
 
+        /// <summary>
+        /// Calculates SHA256 Hash of requested file
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>SHA256 hash, if the file exists.</returns>
+        /// <returns>NotFound, if the file does not exist.</returns>
         [HttpPost]
         [Route("task3")]
         public IActionResult Task3_CalculateSHA256Hash([FromBody] string filePath)
@@ -44,6 +59,11 @@ namespace TradeArtWebAPI.Controllers
             return Ok(res);
         }
 
+        /// <summary>
+        /// Receives top 100 assets and fetches the last prices of them.
+        /// </summary>
+        /// <param name="quoteCurrency"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("task4")]
         public async Task<IActionResult> Task4_GetAssetPrices(string quoteCurrency)
