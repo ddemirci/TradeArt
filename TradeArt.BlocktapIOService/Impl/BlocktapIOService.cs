@@ -5,6 +5,7 @@ using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
 using TradeArt.BlocktapIOService.Data.Models.Response;
 using TradeArt.BlocktapIOService.Helpers;
+using TradeArt.Core;
 using TradeArt.Interfaces;
 
 namespace TradeArt.BlocktapIOService.Impl
@@ -17,7 +18,7 @@ namespace TradeArt.BlocktapIOService.Impl
             _client = new GraphQLHttpClient(Constants.GraphQLApi, new NewtonsoftJsonSerializer());
         }
 
-        public async Task<List<Asset>> GetAllAssets(int? limit)
+        public async Task<Result<List<Asset>>> GetAllAssets(int? limit)
         {
             if (!limit.HasValue) limit = 20;
             try
@@ -35,16 +36,16 @@ namespace TradeArt.BlocktapIOService.Impl
                     }}"
                 };
                 var response = await _client.SendQueryAsync<AssetListResponse>(query);
-                return response.Data.Assets;
+                return Result<List<Asset>>.AsSuccess(response.Data.Assets);
             }
-            //TODO: Handle error
+
             catch (Exception ex)
             {
-                throw;
+                return Result<List<Asset>>.AsFailure(ex.Message);
             }
         }
 
-        public async Task<Market> GetMarketForBaseAndQuoteCurrency(FindExchangeRequest request)
+        public async Task<Result<Market>> GetMarketForBaseAndQuoteCurrency(FindExchangeRequest request)
         {
             try
             {
@@ -72,15 +73,13 @@ namespace TradeArt.BlocktapIOService.Impl
                 };
 
                 var response = await _client.SendQueryAsync<MarketListResponse>(query);
-
                 return !response.Data.Markets.Any() || !response.Data.Markets.Any(x => x.Ticker != null)
-                    ? new Market { BaseSymbol = request.BaseSymbol, QuoteSymbol = request.QuoteSymbol }
-                    : response.Data.Markets.Where(x => x.Ticker != null).OrderByDescending(x => x.Ticker.LastPrice).First();
+                    ? Result<Market>.AsFailure($"Price info for {request.BaseSymbol}/{request.QuoteSymbol} could not be found.")
+                    : Result<Market>.AsSuccess(response.Data.Markets.Where(x => x.Ticker != null).OrderByDescending(x => x.Ticker.LastPrice).First());
             }
-            //TODO: Handle error
             catch (Exception ex)
             {
-                throw;
+                return Result<Market>.AsFailure(ex.Message);
             }
         }
     }

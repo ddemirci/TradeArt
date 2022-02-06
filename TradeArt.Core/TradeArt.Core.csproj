@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TradeArt.BlocktapIOService.Data\TradeArt.BlocktapIOService.Data.csproj" />
-    <ProjectReference Include="..\TradeArt.Core\TradeArt.Core.csproj" />
   </ItemGroup>
 
 </Project>

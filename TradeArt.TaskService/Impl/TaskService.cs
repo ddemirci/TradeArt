@@ -1,5 +1,6 @@
 ﻿using TradeArt.Interfaces;
 using System.Security.Cryptography;
+using TradeArt.Core;
 
 namespace TradeArt.TaskService.Impl
 {
@@ -31,13 +32,20 @@ namespace TradeArt.TaskService.Impl
             return true;
         }
 
-        public string CalculateSHA256Hash(string filePath)
+        public Result<string> CalculateSHA256Hash(string filePath)
         {
-            using var filestream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            using var sha256 = SHA256.Create();
-            var hash = sha256.ComputeHash(filestream);
-            var hashString = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
-            return hashString;
+            try
+            {
+                using var filestream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                using var sha256 = SHA256.Create();
+                var hash = sha256.ComputeHash(filestream);
+                var hashString = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                return Result<string>.AsSuccess(hashString);
+            }
+            catch(Exception ex)
+            {
+                return Result<string>.AsFailure(ex.Message);
+            }
         }
 
     }

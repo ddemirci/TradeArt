@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
+using TradeArt.Core;
+using TradeArt.Core.Models;
 using TradeArt.Interfaces;
 
 namespace TradeArtWebAPI.Controllers
@@ -56,7 +58,7 @@ namespace TradeArtWebAPI.Controllers
             if (!System.IO.File.Exists(filePath))
                 return NotFound($"Specified file does not exists in path {filePath}");
             var res = _taskService.CalculateSHA256Hash(filePath);
-            return Ok(res);
+            return res.IsSuccess ? Ok(res.Data) : StatusCode(500, res.ErrorMessage);
         }
 
         /// <summary>
@@ -68,22 +70,35 @@ namespace TradeArtWebAPI.Controllers
         [Route("task4")]
         public async Task<IActionResult> Task4_GetAssetPrices(string quoteCurrency)
         {
-            var topAssets = await _blocktapIOService.GetAllAssets(100);
-            var assetChunks = topAssets.Select(x=> x.AssetSymbol).Chunk(20);
+            var topAssetsResult = await _blocktapIOService.GetAllAssets(100);
+            if(!topAssetsResult.IsSuccess)
+                return StatusCode(500, topAssetsResult.ErrorMessage);
 
-            var list = new List<Market>(100); 
-            foreach(var assetChunk in assetChunks)
+            quoteCurrency = quoteCurrency.ToUpperInvariant();
+
+            var assetChunks = topAssetsResult.Data.Select(x=> x.AssetSymbol).Chunk(20);
+            var successList = new List<Market>(); 
+            var failureList = new List<string>();
+            foreach (var assetChunk in assetChunks)
             {
-                var res = await Task4_RetrieveMarketInformation(assetChunk, quoteCurrency);
-                list.AddRange(res);
+                var result = await Task4_RetrieveMarketInformation(assetChunk, quoteCurrency);
+                successList.AddRange(result.Where(r => r.IsSuccess).Select(r=> r.Data));
+                failureList.AddRange(result.Where(r => !r.IsSuccess).Select(r => r.ErrorMessage));
             }
 
-            return Ok(list);
+            return !successList.Any() 
+                ? StatusCode(500, failureList)
+                : Ok(new AssetsPriceInformation{ 
+                    SuccessCount = successList.Count, 
+                    FailureCount = failureList.Count,
+                    SuccessList = successList,
+                    FailureList = failureList 
+                });
         }
 
-        private async Task<Market[]> Task4_RetrieveMarketInformation(IEnumerable<string> assets, string quoteSymbol)
+        private async Task<Result<Market>[]> Task4_RetrieveMarketInformation(IEnumerable<string> assets, string quoteSymbol)
         {
-            var taskList = new List<Task<Market>>();
+            var taskList = new List<Task<Result<Market>>>();
             foreach (var asset in assets)
             {
                 taskList.Add(Task.Run(() =>_blocktapIOService.GetMarketForBaseAndQuoteCurrency(new FindExchangeRequest
@@ -92,7 +107,6 @@ namespace TradeArtWebAPI.Controllers
                     QuoteSymbol = quoteSymbol
                 })));
             }
-
             return await Task.WhenAll(taskList);
         }
     }

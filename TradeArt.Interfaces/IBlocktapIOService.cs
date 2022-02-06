@@ -1,11 +1,12 @@
 ﻿using TradeArt.BlocktapIOService.Data.Models;
 using TradeArt.BlocktapIOService.Data.Models.Request;
+using TradeArt.Core;
 
 namespace TradeArt.Interfaces
 {
     public interface IBlocktapIOService
     {
-        Task<List<Asset>> GetAllAssets(int? limit);
-        Task<Market> GetMarketForBaseAndQuoteCurrency(FindExchangeRequest request);
+        Task<Result<List<Asset>>> GetAllAssets(int? limit);
+        Task<Result<Market>> GetMarketForBaseAndQuoteCurrency(FindExchangeRequest request);
     }
 }
