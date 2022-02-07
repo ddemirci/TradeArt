@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Reflection;
+using System;
 
 namespace TradeArtWebAPI
 {
@@ -26,7 +29,20 @@ namespace TradeArtWebAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TradeArtWebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo 
+                {
+                    Title = "TradeArtWebAPI", 
+                    Version = "v1",
+                    Description = "An ASP.NET Core Web API for TradeArt",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Doruk Demirci",
+                        Url = new Uri("https://github.com/ddemirci")
+                    }
+                
+                });
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
         
