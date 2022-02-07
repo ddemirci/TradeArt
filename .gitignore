@@ -361,6 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-
-## Binary Files for SHA256 Hashing question
-**/Files/*.bin
