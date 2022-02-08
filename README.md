@@ -1,4 +1,4 @@
-# TRADE ART Demo Project Documentation
+# TRADEART Demo Project Documentation
 
 * TradeArt demo project is implemented by Doruk Demirci and it has a layered architecture.
 * This document was prepared to give detailed information about the project, its layers, and usage.
